@@ -5,7 +5,13 @@ class User
     @username = username
     @password = password
     @files = {}
-    # @users = {}
+    @users = {}
+
+    # if @username && @users && !@users.has_key?(@username)
+    if @users && !@users.has_key?(@username)
+      @users[username] = password
+    end
+
     # @users[username] = password
   end
 
@@ -19,5 +25,10 @@ class User
 
   def delete(file_to_delete)
     files.delete(file_to_delete)
+  end
+
+  def get_users
+    # @users
+    @users
   end
 end

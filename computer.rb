@@ -1,6 +1,6 @@
 # require_relative './runner.rb'
-require_relative 'user.rb'
-require_relative 'files.rb'
+require_relative './user.rb'
+# require_relative 'files.rb'
 
 class Computer
   attr_reader :username, :password, :users
@@ -8,8 +8,16 @@ class Computer
   def initialize(username=nil, password=nil)
     @username = username
     @password = password
-    @users = {}
-    @users[username] = password
+    @users
+
+    # if @username && @users
+    #   if @users.has_key?(@username)
+    #     puts "User already exists."
+    #   else
+    #     puts @users
+    #     @users[@username] = @password
+    #   end
+    # end
 
     add_user(username, password)
   end
@@ -18,7 +26,7 @@ class Computer
     username = User.new(username: username, password: password)
   end
   
-  def Computer.get_users
-    users
-  end
+  # def get_users
+  #   @users
+  # end
 end

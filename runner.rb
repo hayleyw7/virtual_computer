@@ -1,6 +1,6 @@
 require_relative './computer.rb'
-require_relative "./user.rb"
-require_relative "./files.rb"
+require_relative './user.rb'
+# require_relative './files.rb'
 
 class Runner
   def self.start
@@ -13,15 +13,17 @@ class Runner
     @password_entry = gets.chomp
 
     instantiate_computer
+    # instantiate_user()
     user_choice_prompt
   end
 
   def self.instantiate_computer
-    @computer ||= Computer.new()
+    @computer ||= Computer.new(@username_entry, @password_entry)
   end
 
-  def self.instantiate_user()
+  def self.instantiate_user
     @user ||= User.new(username: @username_entry, password: @password_entry)
+    # @user ||= User.new()
   end
 
   # def self.instantiate_files
@@ -43,7 +45,8 @@ class Runner
 
   def self.user_choice_logic
     choice = gets.chomp.downcase
-    instantiate_user()
+    instantiate_user
+    instantiate_computer
     puts
 
     case choice
@@ -86,7 +89,8 @@ class Runner
       end
 
     when "users"
-      puts users
+      # instantiate_computer
+      puts @user.get_users
 
     when "end"
       start
