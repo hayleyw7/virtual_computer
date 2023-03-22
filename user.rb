@@ -16,6 +16,8 @@ class User
   end
 
   def get_files
+    puts "YOUR FILES:"
+    puts
     puts files
   end
 
@@ -24,7 +26,7 @@ class User
   end
 
   def delete(file_to_delete)
-    files.delete(file_to_delete)
+    files.delete("#{file_to_delete}")
   end
 
   def get_users

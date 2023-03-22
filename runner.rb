@@ -32,12 +32,14 @@ class Runner
 
   def self.user_choice_prompt
     puts
+    puts "----------------------------------"
     puts "WHAT WOULD YOU LIKE TO DO?"
     puts "-- Type 'create' to create a file."
     puts "-- Type 'files' to view all files."
     puts "-- Type 'users' to view all users."
     puts "-- Type 'delete' to delete a file."
     puts "-- Type 'end' to log out."
+    puts "----------------------------------"
     puts
 
     user_choice_logic
@@ -63,12 +65,12 @@ class Runner
       @user.create(file_name, file_content)
   
       puts
-      puts "FILE CREATED"
-      puts
-      puts "File: #{file_name}"
-      puts "Author: #{@username_entry}"
-      puts "Contents: #{file_content}"
-      puts
+      puts "FILE SUCCESSFULLY CREATED!"
+      # puts
+      # puts "File: #{file_name}"
+      # puts "Author: #{@username_entry}"
+      # puts "Contents: #{file_content}"
+      # puts
 
     when "files"
       # instantiate_files
@@ -80,12 +82,12 @@ class Runner
 
       puts
       puts "Are you sure? Y or N"
-
       delete_confirmation = gets.chomp.downcase
+      puts
 
       if delete_confirmation == "y"
         @user.delete(file_to_delete)
-        puts "#{file_to_delete} DELETED"
+        puts "FILE SUCCESSFULLY DELETED!"
       end
 
     when "users"
