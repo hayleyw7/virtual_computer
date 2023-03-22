@@ -30,7 +30,6 @@ class User
   end
 
   def get_users
-    # @users
     @users
   end
 end
