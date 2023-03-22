@@ -32,14 +32,14 @@ class Runner
 
   def self.user_choice_prompt
     puts
-    puts "----------------------------------"
+    puts "-----------------------------"
     puts "WHAT WOULD YOU LIKE TO DO?"
-    puts "-- Type 'create' to create a file."
-    puts "-- Type 'files' to view all files."
-    puts "-- Type 'users' to view all users."
-    puts "-- Type 'delete' to delete a file."
-    puts "-- Type 'end' to log out."
-    puts "----------------------------------"
+    puts "- 'CREATE' - create a file"
+    # puts "- 'DELETE' - delete a file"
+    puts "- 'FILES' - list all files"
+    puts "- 'USERS' - list all users"
+    puts "- 'LOGOUT' - logout"
+    puts "-----------------------------"
     puts
 
     user_choice_logic
