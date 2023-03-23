@@ -2,49 +2,66 @@ require_relative './computer.rb'
 require_relative './user.rb'
 
 class Runner
+  # def initialize
+  #   @@users = {}
+  # end
+
   def self.start
+    @@users = {}
+
     puts
     puts "Username:"
-    @username_entry = gets.chomp
+    username = gets.chomp
     puts
 
     # puts
     # puts "Password:"
     # @password_entry = gets.chomp
 
-    instantiate_computer
-    # instantiate_user
-    user_choice_prompt
+    instantiate_computer(username, @@users)
+    instantiate_user(username, @@users)
+    user_choice_prompt(username, @@users)
   end
 
-  def self.instantiate_computer
-    @computer ||= Computer.new(@username_entry)
+  def self.instantiate_computer(username, users)
+    @computer ||= Computer.new(username, @users)
   end
 
-  def self.instantiate_user
-    puts @user
-    @user ||= User.new(username: @username_entry)
+  def self.instantiate_user(username, users)
+    # puts @user
+    # @user ||= User.new(username: username)
+    # if @@users.key?("${username}"]
+    # puts "USER LIST HERE"
+    # puts @users
+    # if @@users.key?(username)
+    #   # nothing
+    # else
+    @active_user = User.new(username, users)
+      # active_user = @users[username]
+    # puts @active_user
+    # end
   end
 
-  def self.user_choice_prompt
+  def self.user_choice_prompt(username, users)
     puts
     puts "-----------------------------"
     puts "WHAT WOULD YOU LIKE TO DO?"
     puts "- 'CREATE' - create a file"
     puts "- 'DELETE' - delete a file"
     puts "- 'FILES' - list all files"
-    puts "- 'USERS' - list all users"
+    puts "- '@users' - list all @users"
     puts "- 'LOGOUT' - logout"
     puts "-----------------------------"
     puts
 
-    user_choice_logic
+    choice = gets.chomp.downcase
+
+    user_choice_logic(username, @users, choice)
   end
 
-  def self.user_choice_logic
-    choice = gets.chomp.downcase
-    instantiate_user
-    instantiate_computer
+  def self.user_choice_logic(username, users, choice)
+    instantiate_user(username, @users)
+    instantiate_computer(username, @users)
     puts
 
     case choice
@@ -55,13 +72,16 @@ class Runner
       puts "File contents:"
       file_content = gets.chomp
 
-      @user.create(file_name, file_content)
+      # instantiate_user(username, @users)
+
+      # puts @active_user
+      @active_user.create(file_name, file_content, username, @users)
   
       puts
       puts "FILE SUCCESSFULLY CREATED!"
 
     when "files"
-      @user.get_files
+      @active_user.get_files(@users, username)
 
     when "delete"
       puts "File name:"
@@ -73,12 +93,12 @@ class Runner
       puts
 
       if delete_confirmation == "y"
-        @user.delete(file_to_delete)
+        @active_user.delete(file_to_delete, username, @users)
         puts "FILE SUCCESSFULLY DELETED!"
       end
 
-    when "users"
-      puts @user.get_users
+    when "@users"
+      puts @users
 
     when "logout"
       start
@@ -87,7 +107,7 @@ class Runner
       puts "ERROR: INVALID OPTION"
     end
 
-    user_choice_prompt
+    user_choice_prompt(username, @users)
   end
 
   start
