@@ -6,23 +6,24 @@ class Runner
     puts
     puts "Username:"
     @username_entry = gets.chomp
-
     puts
-    puts "Password:"
-    @password_entry = gets.chomp
+
+    # puts
+    # puts "Password:"
+    # @password_entry = gets.chomp
 
     instantiate_computer
-    instantiate_user
+    # instantiate_user
     user_choice_prompt
   end
 
   def self.instantiate_computer
-    @computer ||= Computer.new(@username_entry, @password_entry)
+    @computer ||= Computer.new(@username_entry)
   end
 
   def self.instantiate_user
     puts @user
-    @user ||= User.new(username: @username_entry, password: @password_entry)
+    @user ||= User.new(username: @username_entry)
   end
 
   def self.user_choice_prompt
@@ -30,7 +31,7 @@ class Runner
     puts "-----------------------------"
     puts "WHAT WOULD YOU LIKE TO DO?"
     puts "- 'CREATE' - create a file"
-    # puts "- 'DELETE' - delete a file"
+    puts "- 'DELETE' - delete a file"
     puts "- 'FILES' - list all files"
     puts "- 'USERS' - list all users"
     puts "- 'LOGOUT' - logout"
@@ -62,19 +63,19 @@ class Runner
     when "files"
       @user.get_files
 
-    # when "delete"
-    #   puts "File name:"
-    #   file_to_delete = gets.chomp.to_sym
+    when "delete"
+      puts "File name:"
+      file_to_delete = gets.chomp.to_sym
 
-    #   puts
-    #   puts "Are you sure? Y or N"
-    #   delete_confirmation = gets.chomp.downcase
-    #   puts
+      puts
+      puts "Are you sure? Y or N"
+      delete_confirmation = gets.chomp.downcase
+      puts
 
-    #   if delete_confirmation == "y"
-    #     @user.delete(file_to_delete)
-    #     puts "FILE SUCCESSFULLY DELETED!"
-    #   end
+      if delete_confirmation == "y"
+        @user.delete(file_to_delete)
+        puts "FILE SUCCESSFULLY DELETED!"
+      end
 
     when "users"
       puts @user.get_users

@@ -2,17 +2,17 @@
 require_relative './user.rb'
 
 class Computer
-  attr_reader :username, :password, :users
+  attr_reader :username, :users, :files
 
-  def initialize(username=nil, password=nil)
+  def initialize(username)
     @username = username
-    @password = password
-    @users
+    # @password = password
+    # @users
 
-    add_user(username, password)
+    add_user(@username)
   end
 
-  def add_user(username, password)
-    username = User.new(username: username, password: password)
+  def add_user(username)
+    user = User.new(username: username)
   end
 end
